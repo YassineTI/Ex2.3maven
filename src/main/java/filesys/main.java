@@ -39,42 +39,4 @@ public class main {
 	}
 	
 	
-	public static int recursif (String chemin,int t)throws Exception{
-		int j = 0, i=0;
-		int taille = t;
-		File file = new File(chemin);
-		
-		try{
-			if(!file.exists()){
-				throw new FileNotFoundException ("fichier introuvable");
-		}
-			
-		}catch (FileNotFoundException e) {
-			System.out.println("fichier introuvable");
-		}
-		
-		if(file.isDirectory()){
-			
-					File[] listfile = file.listFiles();
-					Repertoire rep = new Repertoire(chemin);
-					for (File child : listfile) {	
-					
-					
-					if(child.isDirectory())
-					{
-							i++;
-							j = recursif(child.getAbsolutePath(),taille);							
-					}
-					
-					Fichier f = new Fichier(child.getName(), (int) child.length());
-					rep.ajout(f);
-					taille = rep.getTaille();
-			}		
-					if(i!=0)
-						System.out.println("La taille totale est : "+ (j+taille));
-					else System.out.println("La taille du sous repertoire "+"\""+file.getAbsolutePath()+"\""+" est "+ (j+taille));
-		}
-		
-		return taille;
-		}
-	}
+	

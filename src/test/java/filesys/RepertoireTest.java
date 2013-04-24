@@ -49,7 +49,7 @@ public class RepertoireTest {
 	@Test
 	public void testGetTaille() throws Exception {
 		assertTrue(repertoire.getTaille() == 0);
-		assertTrue(main.recursif(c, 0) == 826);
+		assertTrue(repertoire.recursif(c, 0) == 826);
 	}
 
 	/**
