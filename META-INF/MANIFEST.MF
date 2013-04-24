@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: 3mvn
+Bundle-SymbolicName: Ex2.3mvn
+Bundle-Version: 1.0.0.qualifier
+Export-Package: filesys
