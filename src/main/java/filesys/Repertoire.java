@@ -1,6 +1,7 @@
 package filesys;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import javax.naming.NameAlreadyBoundException;
@@ -33,36 +34,76 @@ public class Repertoire extends Entite
         arbo.add(uneEntite);
     }
     
-    public String ajouterAuRep(String chemin, Repertoire destination) throws NameAlreadyBoundException{
+    //ajouter un fichier de chemin "chemin" dans un repertoire destination
+    public String ajouterFichier(String chemin, Repertoire destination) throws IOException{
     	File file = new File(chemin);
+    	System.out.println(file.createNewFile());
+        return file.getAbsolutePath();
+    }
+    
+    //ajouter un repertoire de chemin "chemin" dans un repertoire destination
+    public String ajouterRepertoire(String chemin, Repertoire destination) throws NameAlreadyBoundException{
+    	String c = testerPossibiliteAjout(chemin, destination);
+    	File file = new File(c);
+    	System.out.println(file.mkdir());
+        return file.getAbsolutePath();
+    }
+    
+    public String testerPossibiliteAjout(String chemin, Repertoire destination){
+    	
+    	File file_dest = new File(destination.getNom());
+    	try{
+			if(!file_dest.exists()){
+				throw new FileNotFoundException ("Répertoire introuvable");
+		}
+			
+		}catch (FileNotFoundException e) {
+			System.out.println("Répertoire introuvable");
+		}
+		
+    	File[] list = file_dest.listFiles();
+    	System.out.println(destination.getNom());
+    	
     	
     	//ne pas ajouter une référence null à un répertoire!!!
-    	try{
-    		if(chemin == null)
-    			throw new NullPointerException("on ne peut pas ajouter une référence null à un répertoire!!!");
-    	}catch (NullPointerException e) {
-    		System.out.println("on ne peut pas ajouter une référence null à un répertoire!!!");
-		}
+    	
+    		if(chemin != null){
+    			
+    	
+    	//on teste si c'est null avant de creer le File
+    	File file = new File(chemin);
+    	System.out.println(file.getAbsolutePath());
     	
     	//ne pas ajouter un element de mm nom
     	try{
-    		if(file.exists())
-    			throw new NameAlreadyBoundException("on ne peut pas ajouter un element de mm nom");
-    	}catch (NameAlreadyBoundException e) {
-    		System.out.println("on ne peut pas ajouter un element de mm nom");
+    		for(File child : list){
+    			
+    			if(file.equals(child))
+        			throw new NameAlreadyBoundException("on ne peut pas ajouter un element de même nom");
+        
+    		  }
+    		}catch (NameAlreadyBoundException e) {
+    		System.out.println("on ne peut pas ajouter un element de même nom!!!!    Ce nom existe déja.");
 		}
     	
     	//ne pas ajouter un repertoire dans lui mm
     	try{
+    		
     		String dest_chem = destination.getNom();
     		if(file.getAbsolutePath().equals(dest_chem))
     			throw new Exception("on ne peut pas ajouter un repertoire dans lui mm!!!");
     	}catch (Exception e) {
     		System.out.println("on ne peut pas ajouter un repertoire dans lui mm!!!");
 		}
-    	
-        System.out.println(file.mkdir());
-        return file.getAbsolutePath();
+    		return file.getAbsolutePath();
+    }
+    		else {
+    			System.out.println("on ne peut pas ajouter une référence null à un répertoire!!!");
+    			
+    			return null;
+      		
+      		
+    		}
     }
     
     public int getTaille()
@@ -74,6 +115,8 @@ public class Repertoire extends Entite
         return taille;
     }
     
+    
+    //parcours recursif d'un repertoire pour calculer sa taille
     public int recursif (String chemin,int t)throws Exception{
 		int j = 0, i=0;
 		int taille = t;

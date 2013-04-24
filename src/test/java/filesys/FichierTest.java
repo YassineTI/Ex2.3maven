@@ -14,7 +14,7 @@ import org.junit.Test;
 //import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
- * @author Yousra
+ * @author Yassine
  *
  */
 public class FichierTest {
@@ -47,8 +47,7 @@ public class FichierTest {
 	 */
 	@Test
 	public void testGetTaille() throws Exception {
-		//fail("Not yet implemented");
-		//assertTrue(main.recursif(c, 0) < 2000);
+		assertTrue(main.recursif(c, 0) < 2000);
 		assertTrue(fichier.getTaille() == 467);
 	}
 	

@@ -14,12 +14,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Yousra
+ * @author Yassine
  *
  */
 public class RepertoireTest {
 
-	private String c ;
+	private String c , c2, c3;
 	private File file;
 	private Repertoire repertoire;
 	
@@ -28,10 +28,12 @@ public class RepertoireTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		c= "C:\\Users\\Yousra\\Documents\\Workspace\\Ex2.3\\filesys\\dossier\\new";
+		c= "C:\\Users\\Yassine\\Documents\\Workspace\\Ex2.3\\filesys\\dossier\\new";
+		c2= "C:\\Users\\Yassine\\Documents\\Workspace\\Ex2.3\\filesys\\dossier\\new\\Fichier.java";
+		c3= "C:\\Users\\Yassine\\Documents\\Workspace\\Ex2.3\\filesys\\dossier\\new\\test.txt";
 		file = new File(c);
 		repertoire = 	new Repertoire(file.getAbsolutePath());
-		System.out.println(file.getAbsolutePath());
+		//System.out.println(file.getAbsolutePath());
 	}
 
 	/**
@@ -39,7 +41,7 @@ public class RepertoireTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		c=null;
+		//c=null;
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class RepertoireTest {
 	 */
 	@Test
 	public void testRepertoire() {
-		assertNotNull("L'instance est créée", repertoire);
+		//assertNotNull("L'instance est créée", repertoire);
 	}
 
 	/**
@@ -65,14 +67,9 @@ public class RepertoireTest {
 	 * @throws NameAlreadyBoundException 
 	 */
 	@Test
-	public void testAjouterAuRep() throws NameAlreadyBoundException {
-		assertEquals("Impossible d'ajouter un element de mm nom", c, repertoire.ajouterAuRep(c, repertoire));
-		//assertEquals("Impossible d'ajouter un element de mm nom", c, repertoire.ajouterAuRep(c, repertoire));
+	public void testerPossibiliteAjout() throws NameAlreadyBoundException {
+		assertEquals("Impossible d'ajouter un element de mm nom", c2, repertoire.testerPossibiliteAjout(c2, repertoire));
+		assertEquals("Impossible d'ajouter un repertoire dans lui même", c, repertoire.testerPossibiliteAjout(c, repertoire));
+		assertEquals("Impossible d'ajouter une ref null", null, repertoire.testerPossibiliteAjout(null, repertoire));
 	}
-//	public void testSetNom() {
-//	
-//		personne.setNom("nom2");
-//		assertEquals("Est ce que nom est correct", "nom2", personne.getNom());
-//		
-//		}
 }
