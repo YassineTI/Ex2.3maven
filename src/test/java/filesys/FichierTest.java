@@ -47,7 +47,6 @@ public class FichierTest {
 	 */
 	@Test
 	public void testGetTaille() throws Exception {
-		assertTrue(main.recursif(c, 0) < 2000);
 		assertTrue(fichier.getTaille() == 467);
 	}
 	
