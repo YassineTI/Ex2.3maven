@@ -48,7 +48,6 @@ public class FichierTest {
 	@Test
 	public void testGetTaille() throws Exception {
 		assertTrue(fichier.getTaille() == 467);
-		assertTrue(fichier.getTaille() == 467);
 	}
 	
 	@Test
